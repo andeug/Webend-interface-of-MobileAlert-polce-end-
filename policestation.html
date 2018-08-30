@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS = false; L_NO_TOUCH = false; L_DISABLE_3D = false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.2.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawgit.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <style> #map_3d69797852424901b4bc1be5978f0304 {
+                position : relative;
+                width : 100.0%;
+                height: 100.0%;
+                left: 0.0%;
+                top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.rawgit.com/ljagis/leaflet-measure/2.1.7/dist/leaflet-measure.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/ljagis/leaflet-measure/2.1.7/dist/leaflet-measure.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_3d69797852424901b4bc1be5978f0304" ></div>
+        
+</body>
+<script>    
+    
+
+            
+                var bounds = null;
+            
+
+            var map_3d69797852424901b4bc1be5978f0304 = L.map(
+                                  'map_3d69797852424901b4bc1be5978f0304',
+                                  {center: [-1.2812886730769233,36.808737553076924],
+                                  zoom: 12,
+                                  maxBounds: bounds,
+                                  layers: [],
+                                  worldCopyJump: false,
+                                  crs: L.CRS.EPSG3857
+                                 });
+            
+        
+    
+            var tile_layer_0d56982f253b45089ee9c40e27379a9f = L.tileLayer(
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+  "attribution": null,
+  "detectRetina": false,
+  "maxZoom": 18,
+  "minZoom": 1,
+  "noWrap": false,
+  "subdomains": "abc"
+}
+                ).addTo(map_3d69797852424901b4bc1be5978f0304);
+        
+    
+            var measure_control_eb42587a01a349fcb26b29147a4ed361 = new L.Control.Measure(
+            {"secondaryLengthUnit": "miles", "primaryLengthUnit": "meters", "position": "topright", "secondaryAreaUnit": "acres", "primaryAreaUnit": "sqmeters"});
+            map_3d69797852424901b4bc1be5978f0304.addControl(measure_control_eb42587a01a349fcb26b29147a4ed361);
+
+        
+    
+            L.control.fullscreen({
+                position: 'topright',
+                title: 'Expand me',
+                titleCancel: 'Exit me',
+                forceSeparateButton: true,
+                }).addTo(map_3d69797852424901b4bc1be5978f0304);
+            map_3d69797852424901b4bc1be5978f0304.on('enterFullscreen', function(){
+                console.log('entered fullscreen');
+            });
+
+        
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_0dc92ee6f24a4885b376c7c5593c1fb3 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_0dc92ee6f24a4885b376c7c5593c1fb3
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_568d734b71eb4a33afec3139d7c5054e = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_568d734b71eb4a33afec3139d7c5054e
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_b4c55f2828f24b998378bfe27ff4efc4 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_b4c55f2828f24b998378bfe27ff4efc4
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_6d1ef90d40c8403db63144d1a62f279c = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_6d1ef90d40c8403db63144d1a62f279c
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_f817f8efd51b437cab2c1c41fd553dc5 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_f817f8efd51b437cab2c1c41fd553dc5
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_d079bd3544004e7691ebcee3cf6dd625 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_d079bd3544004e7691ebcee3cf6dd625
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_cdf4570b59d04b2aa4850c2241847e6f = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_cdf4570b59d04b2aa4850c2241847e6f
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_ae81edcb9443445cabd0e918dacd9c32 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_ae81edcb9443445cabd0e918dacd9c32
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_9d2656b8c7384eb5a679b8e4330444e4 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_9d2656b8c7384eb5a679b8e4330444e4
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_6b46ad02fbe74c73a63667854e56487f = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_6b46ad02fbe74c73a63667854e56487f
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_d91a45bec4294c2baceffad9b87a6d18 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_d91a45bec4294c2baceffad9b87a6d18
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_4ced7f8f6c6b4e4eadf5f384cbede4ae = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_4ced7f8f6c6b4e4eadf5f384cbede4ae
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_58232c13a80c4f2cabca8c55a2f2ce01 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_58232c13a80c4f2cabca8c55a2f2ce01
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_42140349f0e941b2943b998fca4c7017 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_42140349f0e941b2943b998fca4c7017
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_20fc658446b5473595faf23edf974dfc = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_20fc658446b5473595faf23edf974dfc
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_1edd79a7cb2f4e949a162f72967fd4ce = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_1edd79a7cb2f4e949a162f72967fd4ce
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_3d7002ce2ff24abf85ae09df8f99743e = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_3d7002ce2ff24abf85ae09df8f99743e
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_ec6f8612ac4c45e6863b53167896de8b = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_ec6f8612ac4c45e6863b53167896de8b
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_40612e0dead14a1c96f51b97f0fa904c = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_40612e0dead14a1c96f51b97f0fa904c
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_ae6e0e44f494460caba695fa9ec2c867 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_ae6e0e44f494460caba695fa9ec2c867
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_2110418e570b4676b9c73fee05ab4c5f = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_2110418e570b4676b9c73fee05ab4c5f
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_a083ea1929f14667bd235e56f2f25ac0 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_a083ea1929f14667bd235e56f2f25ac0
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_9cd67903d7584f71865f2e7d1c59f6ce = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_9cd67903d7584f71865f2e7d1c59f6ce
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_e0fbd1f810a4467181aedd35549c71e0 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_e0fbd1f810a4467181aedd35549c71e0
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_0805506b0c5c40c1826fbc77baa70c99 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_0805506b0c5c40c1826fbc77baa70c99
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+                function newMarker(e){
+                    var new_mark = L.marker().setLatLng(e.latlng).addTo(map_3d69797852424901b4bc1be5978f0304);
+                    new_mark.dragging.enable();
+                    new_mark.on('dblclick', function(e){ map_3d69797852424901b4bc1be5978f0304.removeLayer(e.target)})
+                    var lat = e.latlng.lat.toFixed(4),
+                       lng = e.latlng.lng.toFixed(4);
+                    new_mark.bindPopup("temporary marker");
+                    };
+                map_3d69797852424901b4bc1be5978f0304.on('click', newMarker);
+            
+    
+                var lat_lng_popup_835b2467de8d4af089ff02e8b7c98ad3 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_835b2467de8d4af089ff02e8b7c98ad3
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_3d69797852424901b4bc1be5978f0304);
+                    }
+                map_3d69797852424901b4bc1be5978f0304.on('click', latLngPop);
+            
+    
+            var marker_cluster_6cba0cf39cea441fb764fb5587e41e83 = L.markerClusterGroup({
+                
+            });
+            map_3d69797852424901b4bc1be5978f0304.addLayer(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+            var marker_092eb80f5c424824afd50b1bc674a1ce = L.marker(
+                [-1.2438912,36.8808788],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_4ffac087dc9e45a9b91391595d8549f1 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_092eb80f5c424824afd50b1bc674a1ce.setIcon(icon_4ffac087dc9e45a9b91391595d8549f1);
+            
+    
+            var popup_f49587f1eda040dc9b944a5e973a9174 = L.popup({maxWidth: '300'});
+
+            
+                var html_210f9cb38f7649c291aac29ddcd7eb51 = $('<div id="html_210f9cb38f7649c291aac29ddcd7eb51" style="width: 100.0%; height: 100.0%;">police station:Babadogo (Ruaraka) </div>')[0];
+                popup_f49587f1eda040dc9b944a5e973a9174.setContent(html_210f9cb38f7649c291aac29ddcd7eb51);
+            
+
+            marker_092eb80f5c424824afd50b1bc674a1ce.bindPopup(popup_f49587f1eda040dc9b944a5e973a9174);
+
+            
+        
+    
+
+            var marker_2f3a52c86ad246e2b51844f841458f05 = L.marker(
+                [-1.2794229,36.8182285],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_c8e69c8fa952470e8b17342ed6d19568 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_2f3a52c86ad246e2b51844f841458f05.setIcon(icon_c8e69c8fa952470e8b17342ed6d19568);
+            
+    
+            var popup_7d13e064732e452da0a012d6e31ca93f = L.popup({maxWidth: '300'});
+
+            
+                var html_a3f4c5c645c7445f81854d99dad29b78 = $('<div id="html_a3f4c5c645c7445f81854d99dad29b78" style="width: 100.0%; height: 100.0%;">police station:Central Police </div>')[0];
+                popup_7d13e064732e452da0a012d6e31ca93f.setContent(html_a3f4c5c645c7445f81854d99dad29b78);
+            
+
+            marker_2f3a52c86ad246e2b51844f841458f05.bindPopup(popup_7d13e064732e452da0a012d6e31ca93f);
+
+            
+        
+    
+
+            var marker_51f879150a38460ea5663d8bac6488f7 = L.marker(
+                [-1.2920659,36.8219462],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_4d0172ad77e44c089f4ba90aa1f8534f = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_51f879150a38460ea5663d8bac6488f7.setIcon(icon_4d0172ad77e44c089f4ba90aa1f8534f);
+            
+    
+            var popup_4d35bcb336be42f78f8ffcb10b239d0f = L.popup({maxWidth: '300'});
+
+            
+                var html_e06e2c44a1d4418cb6b9ba92b0599bb8 = $('<div id="html_e06e2c44a1d4418cb6b9ba92b0599bb8" style="width: 100.0%; height: 100.0%;">police station:Control Room  (Nairobi Area) </div>')[0];
+                popup_4d35bcb336be42f78f8ffcb10b239d0f.setContent(html_e06e2c44a1d4418cb6b9ba92b0599bb8);
+            
+
+            marker_51f879150a38460ea5663d8bac6488f7.bindPopup(popup_4d35bcb336be42f78f8ffcb10b239d0f);
+
+            
+        
+    
+
+            var marker_a6ca3a7105de4c6db2f263f6f4182b43 = L.marker(
+                [-1.2364989,36.8094698],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_9d4d84d187b54a4795d424b0c040ed30 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_a6ca3a7105de4c6db2f263f6f4182b43.setIcon(icon_9d4d84d187b54a4795d424b0c040ed30);
+            
+    
+            var popup_4f9d05bf9e434600b000fbfcee8b91dc = L.popup({maxWidth: '300'});
+
+            
+                var html_4c5840de9fb34e57941bbef08eee1d5f = $('<div id="html_4c5840de9fb34e57941bbef08eee1d5f" style="width: 100.0%; height: 100.0%;">police station:Gigiri </div>')[0];
+                popup_4f9d05bf9e434600b000fbfcee8b91dc.setContent(html_4c5840de9fb34e57941bbef08eee1d5f);
+            
+
+            marker_a6ca3a7105de4c6db2f263f6f4182b43.bindPopup(popup_4f9d05bf9e434600b000fbfcee8b91dc);
+
+            
+        
+    
+
+            var marker_930c70e107fc473e8f9b3f2845134873 = L.marker(
+                [-1.3022371,36.7665705],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_6acfe8e299364e1a9c55a2d3bf199601 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_930c70e107fc473e8f9b3f2845134873.setIcon(icon_6acfe8e299364e1a9c55a2d3bf199601);
+            
+    
+            var popup_d1e0bef5641645f486ed1db1cd4f2315 = L.popup({maxWidth: '300'});
+
+            
+                var html_0e5c51e30a7b46ada4dfda053433238c = $('<div id="html_0e5c51e30a7b46ada4dfda053433238c" style="width: 100.0%; height: 100.0%;">police station:Jamhuri </div>')[0];
+                popup_d1e0bef5641645f486ed1db1cd4f2315.setContent(html_0e5c51e30a7b46ada4dfda053433238c);
+            
+
+            marker_930c70e107fc473e8f9b3f2845134873.bindPopup(popup_d1e0bef5641645f486ed1db1cd4f2315);
+
+            
+        
+    
+
+            var marker_9b394a4c700c49d4b8f5fb89ff82521d = L.marker(
+                [-1.26226,36.72651],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_4163c19f8e454b8aa7e007b9778c0407 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_9b394a4c700c49d4b8f5fb89ff82521d.setIcon(icon_4163c19f8e454b8aa7e007b9778c0407);
+            
+    
+            var popup_ab6a1b90b4264f5ea9632efaa9956bfa = L.popup({maxWidth: '300'});
+
+            
+                var html_c086fd320d3a474b9e24adfbddb2f275 = $('<div id="html_c086fd320d3a474b9e24adfbddb2f275" style="width: 100.0%; height: 100.0%;">police station:Kabete </div>')[0];
+                popup_ab6a1b90b4264f5ea9632efaa9956bfa.setContent(html_c086fd320d3a474b9e24adfbddb2f275);
+            
+
+            marker_9b394a4c700c49d4b8f5fb89ff82521d.bindPopup(popup_ab6a1b90b4264f5ea9632efaa9956bfa);
+
+            
+        
+    
+
+            var marker_12588757d78641428c494a13a899abab = L.marker(
+                [-1.2846093,36.83331897],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_e56d1876782840e5838ca8f65afefcf4 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_12588757d78641428c494a13a899abab.setIcon(icon_e56d1876782840e5838ca8f65afefcf4);
+            
+    
+            var popup_09a2c887388048b3bfd2d7838c5dc1b1 = L.popup({maxWidth: '300'});
+
+            
+                var html_6efaca4b4d8b463e8973be07f44c6e8a = $('<div id="html_6efaca4b4d8b463e8973be07f44c6e8a" style="width: 100.0%; height: 100.0%;">police station:Kamukunji </div>')[0];
+                popup_09a2c887388048b3bfd2d7838c5dc1b1.setContent(html_6efaca4b4d8b463e8973be07f44c6e8a);
+            
+
+            marker_12588757d78641428c494a13a899abab.bindPopup(popup_09a2c887388048b3bfd2d7838c5dc1b1);
+
+            
+        
+    
+
+            var marker_a5f5477f48e54cf08701ac98b70c0e17 = L.marker(
+                [-1.3224391,36.70657351],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_5ccb6b0e3ac84cf3b371b3eab79b220b = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_a5f5477f48e54cf08701ac98b70c0e17.setIcon(icon_5ccb6b0e3ac84cf3b371b3eab79b220b);
+            
+    
+            var popup_4b020d848d384a20a6ce5365b21736f7 = L.popup({maxWidth: '300'});
+
+            
+                var html_862f1b06a3c8457e87c60eef7a46af9a = $('<div id="html_862f1b06a3c8457e87c60eef7a46af9a" style="width: 100.0%; height: 100.0%;">police station:Karen </div>')[0];
+                popup_4b020d848d384a20a6ce5365b21736f7.setContent(html_862f1b06a3c8457e87c60eef7a46af9a);
+            
+
+            marker_a5f5477f48e54cf08701ac98b70c0e17.bindPopup(popup_4b020d848d384a20a6ce5365b21736f7);
+
+            
+        
+    
+
+            var marker_83ca932bb76c4d2aad62ee053e274331 = L.marker(
+                [-1.2194561,36.89456118],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_b4aff137fe9940fe8cda911b38082628 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_83ca932bb76c4d2aad62ee053e274331.setIcon(icon_b4aff137fe9940fe8cda911b38082628);
+            
+    
+            var popup_60410ff6232744bb807396cd253b1856 = L.popup({maxWidth: '300'});
+
+            
+                var html_0db086c401e1433ab07f75c594993127 = $('<div id="html_0db086c401e1433ab07f75c594993127" style="width: 100.0%; height: 100.0%;">police station:Kasarini </div>')[0];
+                popup_60410ff6232744bb807396cd253b1856.setContent(html_0db086c401e1433ab07f75c594993127);
+            
+
+            marker_83ca932bb76c4d2aad62ee053e274331.bindPopup(popup_60410ff6232744bb807396cd253b1856);
+
+            
+        
+    
+
+            var marker_471d7e2168a544b3a5e6a0da8c69793a = L.marker(
+                [-1.2646959,36.92559737],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_14a423b6ca944ae292bd4f81e0008832 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_471d7e2168a544b3a5e6a0da8c69793a.setIcon(icon_14a423b6ca944ae292bd4f81e0008832);
+            
+    
+            var popup_7023b24b313b488096d1c524c8467350 = L.popup({maxWidth: '300'});
+
+            
+                var html_e1a7cb41f82149e9b87eff597b82ceab = $('<div id="html_e1a7cb41f82149e9b87eff597b82ceab" style="width: 100.0%; height: 100.0%;">police station:Kayole </div>')[0];
+                popup_7023b24b313b488096d1c524c8467350.setContent(html_e1a7cb41f82149e9b87eff597b82ceab);
+            
+
+            marker_471d7e2168a544b3a5e6a0da8c69793a.bindPopup(popup_7023b24b313b488096d1c524c8467350);
+
+            
+        
+    
+
+            var marker_6ae28529ca8b484e8bd8ddaadde138a0 = L.marker(
+                [-1.2753364,36.7943701],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_88f64b907dab44e2886ad809d8fba9d5 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_6ae28529ca8b484e8bd8ddaadde138a0.setIcon(icon_88f64b907dab44e2886ad809d8fba9d5);
+            
+    
+            var popup_60b8734451c54edba2f6a6df361c9316 = L.popup({maxWidth: '300'});
+
+            
+                var html_74cb3595956348d9b73a0cec83434d71 = $('<div id="html_74cb3595956348d9b73a0cec83434d71" style="width: 100.0%; height: 100.0%;">police station:Kileleshwa </div>')[0];
+                popup_60b8734451c54edba2f6a6df361c9316.setContent(html_74cb3595956348d9b73a0cec83434d71);
+            
+
+            marker_6ae28529ca8b484e8bd8ddaadde138a0.bindPopup(popup_60b8734451c54edba2f6a6df361c9316);
+
+            
+        
+    
+
+            var marker_a0f3e00ed970494f8a768c5421b7d44b = L.marker(
+                [-1.2919626,36.79508345],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_a8467268c11f4b2ebfa9a2937414b20f = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_a0f3e00ed970494f8a768c5421b7d44b.setIcon(icon_a8467268c11f4b2ebfa9a2937414b20f);
+            
+    
+            var popup_220bc6e2e4ca4d4d80e719870c90a76e = L.popup({maxWidth: '300'});
+
+            
+                var html_97d90b5612ba46d685a3b538c071df34 = $('<div id="html_97d90b5612ba46d685a3b538c071df34" style="width: 100.0%; height: 100.0%;">police station:Kilimani </div>')[0];
+                popup_220bc6e2e4ca4d4d80e719870c90a76e.setContent(html_97d90b5612ba46d685a3b538c071df34);
+            
+
+            marker_a0f3e00ed970494f8a768c5421b7d44b.bindPopup(popup_220bc6e2e4ca4d4d80e719870c90a76e);
+
+            
+        
+    
+
+            var marker_99dfa5fc07c6465fa3f11e709ab6d6b0 = L.marker(
+                [-1.3320633,36.78151186],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_c0e0eb2affc04a9891b534c8fc189b3e = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_99dfa5fc07c6465fa3f11e709ab6d6b0.setIcon(icon_c0e0eb2affc04a9891b534c8fc189b3e);
+            
+    
+            var popup_33e95e9f5f7f4464ad4caf4be1c1f5cb = L.popup({maxWidth: '300'});
+
+            
+                var html_a9f33ca8ab0943808c1b8b43e8008c6c = $('<div id="html_a9f33ca8ab0943808c1b8b43e8008c6c" style="width: 100.0%; height: 100.0%;">police station:Langata </div>')[0];
+                popup_33e95e9f5f7f4464ad4caf4be1c1f5cb.setContent(html_a9f33ca8ab0943808c1b8b43e8008c6c);
+            
+
+            marker_99dfa5fc07c6465fa3f11e709ab6d6b0.bindPopup(popup_33e95e9f5f7f4464ad4caf4be1c1f5cb);
+
+            
+        
+    
+
+            var marker_ea2a781cc7d641ceac8dfbbc801791f0 = L.marker(
+                [-1.2943168,36.8623697],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_fb7e4db1a71e46b19a3e1ad050d951b3 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_ea2a781cc7d641ceac8dfbbc801791f0.setIcon(icon_fb7e4db1a71e46b19a3e1ad050d951b3);
+            
+    
+            var popup_e0ad774c7b3b4d76ac51b1aa7df69e51 = L.popup({maxWidth: '300'});
+
+            
+                var html_cdfe3fe6cef94465a958532ba8b737b3 = $('<div id="html_cdfe3fe6cef94465a958532ba8b737b3" style="width: 100.0%; height: 100.0%;">police station:Makadara Dc </div>')[0];
+                popup_e0ad774c7b3b4d76ac51b1aa7df69e51.setContent(html_cdfe3fe6cef94465a958532ba8b737b3);
+            
+
+            marker_ea2a781cc7d641ceac8dfbbc801791f0.bindPopup(popup_e0ad774c7b3b4d76ac51b1aa7df69e51);
+
+            
+        
+    
+
+            var marker_6a67926e730a4fa5891c723bea2dd1dc = L.marker(
+                [-1.2950301,36.85063767],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_062dc7137f6e49a09d601d769cc2b7f6 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_6a67926e730a4fa5891c723bea2dd1dc.setIcon(icon_062dc7137f6e49a09d601d769cc2b7f6);
+            
+    
+            var popup_3f3d9face2a64ea0ae97d5da7b64d457 = L.popup({maxWidth: '300'});
+
+            
+                var html_95b35d43041849b090d82a9bf162e57c = $('<div id="html_95b35d43041849b090d82a9bf162e57c" style="width: 100.0%; height: 100.0%;">police station:Makongeni </div>')[0];
+                popup_3f3d9face2a64ea0ae97d5da7b64d457.setContent(html_95b35d43041849b090d82a9bf162e57c);
+            
+
+            marker_6a67926e730a4fa5891c723bea2dd1dc.bindPopup(popup_3f3d9face2a64ea0ae97d5da7b64d457);
+
+            
+        
+    
+
+            var marker_ceab13f52cbc484c9cd4181f2f4e892c = L.marker(
+                [-1.2601438,36.84270809],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_557c626481d44e4ea3e6c15c1c4ef6c1 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_ceab13f52cbc484c9cd4181f2f4e892c.setIcon(icon_557c626481d44e4ea3e6c15c1c4ef6c1);
+            
+    
+            var popup_5682838d9ed64de3b9020a6a967da439 = L.popup({maxWidth: '300'});
+
+            
+                var html_ab8f60c420774ccaa5faa1cdc31be96e = $('<div id="html_ab8f60c420774ccaa5faa1cdc31be96e" style="width: 100.0%; height: 100.0%;">police station:Muthaiga </div>')[0];
+                popup_5682838d9ed64de3b9020a6a967da439.setContent(html_ab8f60c420774ccaa5faa1cdc31be96e);
+            
+
+            marker_ceab13f52cbc484c9cd4181f2f4e892c.bindPopup(popup_5682838d9ed64de3b9020a6a967da439);
+
+            
+        
+    
+
+            var marker_c54461bc89c64b99aa6120268e5ba266 = L.marker(
+                [-1.265871,36.77338677],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_677ee6ce5cb74ca7ad03d954d13c6cf2 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_c54461bc89c64b99aa6120268e5ba266.setIcon(icon_677ee6ce5cb74ca7ad03d954d13c6cf2);
+            
+    
+            var popup_32eeec7993764cfbbc0ded1020ca29eb = L.popup({maxWidth: '300'});
+
+            
+                var html_2d6413178af247e0bee61ed6b2ce5324 = $('<div id="html_2d6413178af247e0bee61ed6b2ce5324" style="width: 100.0%; height: 100.0%;">police station:Muthangari </div>')[0];
+                popup_32eeec7993764cfbbc0ded1020ca29eb.setContent(html_2d6413178af247e0bee61ed6b2ce5324);
+            
+
+            marker_c54461bc89c64b99aa6120268e5ba266.bindPopup(popup_32eeec7993764cfbbc0ded1020ca29eb);
+
+            
+        
+    
+
+            var marker_6caafe52a308419dbce62da14f855617 = L.marker(
+                [-1.2360253,36.89056889],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_9a276e5a895b4b499a726daf20e384ec = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_6caafe52a308419dbce62da14f855617.setIcon(icon_9a276e5a895b4b499a726daf20e384ec);
+            
+    
+            var popup_0514456a64094dfdbb494a531f394222 = L.popup({maxWidth: '300'});
+
+            
+                var html_23018ae566cc4194918f7d109b66184f = $('<div id="html_23018ae566cc4194918f7d109b66184f" style="width: 100.0%; height: 100.0%;">police station:Ngomongo </div>')[0];
+                popup_0514456a64094dfdbb494a531f394222.setContent(html_23018ae566cc4194918f7d109b66184f);
+            
+
+            marker_6caafe52a308419dbce62da14f855617.bindPopup(popup_0514456a64094dfdbb494a531f394222);
+
+            
+        
+    
+
+            var marker_ebe065ed383544368a88f0ba4c474ce5 = L.marker(
+                [-1.3655176,36.65372886],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_e02921d6d23349cda0e8f92c091de113 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_ebe065ed383544368a88f0ba4c474ce5.setIcon(icon_e02921d6d23349cda0e8f92c091de113);
+            
+    
+            var popup_3cf70737a570461ea320a3dd0d1c94cf = L.popup({maxWidth: '300'});
+
+            
+                var html_b3c0dc3bd9e34d869c8c84fa96401bbe = $('<div id="html_b3c0dc3bd9e34d869c8c84fa96401bbe" style="width: 100.0%; height: 100.0%;">police station:Ngong </div>')[0];
+                popup_3cf70737a570461ea320a3dd0d1c94cf.setContent(html_b3c0dc3bd9e34d869c8c84fa96401bbe);
+            
+
+            marker_ebe065ed383544368a88f0ba4c474ce5.bindPopup(popup_3cf70737a570461ea320a3dd0d1c94cf);
+
+            
+        
+    
+
+            var marker_5dc6e6762f6e49d8b1d0a68dda0f7d4a = L.marker(
+                [-1.2702096,36.83594492],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_e55ddedf6c1941ccaf427ab975293e15 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_5dc6e6762f6e49d8b1d0a68dda0f7d4a.setIcon(icon_e55ddedf6c1941ccaf427ab975293e15);
+            
+    
+            var popup_386b8d56276e4475b7896270a5f48557 = L.popup({maxWidth: '300'});
+
+            
+                var html_091b28bd06d7472c93d2970e4b98f4e6 = $('<div id="html_091b28bd06d7472c93d2970e4b98f4e6" style="width: 100.0%; height: 100.0%;">police station:Pangani </div>')[0];
+                popup_386b8d56276e4475b7896270a5f48557.setContent(html_091b28bd06d7472c93d2970e4b98f4e6);
+            
+
+            marker_5dc6e6762f6e49d8b1d0a68dda0f7d4a.bindPopup(popup_386b8d56276e4475b7896270a5f48557);
+
+            
+        
+    
+
+            var marker_2f15b784231e4fa1a0112d9f86564117 = L.marker(
+                [-1.2652082,36.81229836],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_8c6601671c3a4b3e911a3f9742d84fc0 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_2f15b784231e4fa1a0112d9f86564117.setIcon(icon_8c6601671c3a4b3e911a3f9742d84fc0);
+            
+    
+            var popup_2fc51ee9039f460cab652d8f53c29377 = L.popup({maxWidth: '300'});
+
+            
+                var html_b0d065fb4fa54e379c45216454b8476a = $('<div id="html_b0d065fb4fa54e379c45216454b8476a" style="width: 100.0%; height: 100.0%;">police station:Parklands </div>')[0];
+                popup_2fc51ee9039f460cab652d8f53c29377.setContent(html_b0d065fb4fa54e379c45216454b8476a);
+            
+
+            marker_2f15b784231e4fa1a0112d9f86564117.bindPopup(popup_2fc51ee9039f460cab652d8f53c29377);
+
+            
+        
+    
+
+            var marker_2afa18f86d044cd2842e9c27280f9897 = L.marker(
+                [-1.2937125,36.7394733],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_85facdfe7cb1468a8ba8e17007db0020 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_2afa18f86d044cd2842e9c27280f9897.setIcon(icon_85facdfe7cb1468a8ba8e17007db0020);
+            
+    
+            var popup_2f04979ad447455f9cd7d958d75ecc5b = L.popup({maxWidth: '300'});
+
+            
+                var html_abed86123f94401f9093961824ccbd8e = $('<div id="html_abed86123f94401f9093961824ccbd8e" style="width: 100.0%; height: 100.0%;">police station:Riruta </div>')[0];
+                popup_2f04979ad447455f9cd7d958d75ecc5b.setContent(html_abed86123f94401f9093961824ccbd8e);
+            
+
+            marker_2afa18f86d044cd2842e9c27280f9897.bindPopup(popup_2f04979ad447455f9cd7d958d75ecc5b);
+
+            
+        
+    
+
+            var marker_837a6e4ae9d74d21830646bda0aff7d6 = L.marker(
+                [-1.3966157,36.75679567],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_d506eb1353294ce4a8b8eb790ca2d434 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_837a6e4ae9d74d21830646bda0aff7d6.setIcon(icon_d506eb1353294ce4a8b8eb790ca2d434);
+            
+    
+            var popup_b2279b4e1aab420c97e885f3f9d5735b = L.popup({maxWidth: '300'});
+
+            
+                var html_0fa144349b0d4df08b6d11afb996ae2a = $('<div id="html_0fa144349b0d4df08b6d11afb996ae2a" style="width: 100.0%; height: 100.0%;">police station:Rongai </div>')[0];
+                popup_b2279b4e1aab420c97e885f3f9d5735b.setContent(html_0fa144349b0d4df08b6d11afb996ae2a);
+            
+
+            marker_837a6e4ae9d74d21830646bda0aff7d6.bindPopup(popup_b2279b4e1aab420c97e885f3f9d5735b);
+
+            
+        
+    
+
+            var marker_5e53cf27a8f94b06a9da3513c3398afd = L.marker(
+                [-1.2232956,36.82316541],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_9a6f75aa8649433999dc01c9711ce016 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_5e53cf27a8f94b06a9da3513c3398afd.setIcon(icon_9a6f75aa8649433999dc01c9711ce016);
+            
+    
+            var popup_165bf05239da4b04aa921df96004fcc4 = L.popup({maxWidth: '300'});
+
+            
+                var html_a483a83d6f2648d48d2f941ea9e64c40 = $('<div id="html_a483a83d6f2648d48d2f941ea9e64c40" style="width: 100.0%; height: 100.0%;">police station:Runda </div>')[0];
+                popup_165bf05239da4b04aa921df96004fcc4.setContent(html_a483a83d6f2648d48d2f941ea9e64c40);
+            
+
+            marker_5e53cf27a8f94b06a9da3513c3398afd.bindPopup(popup_165bf05239da4b04aa921df96004fcc4);
+
+            
+        
+    
+
+            var marker_26f667cc9241460c9ba8407c81bd3392 = L.marker(
+                [-1.2906238,36.84661714],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_e80d1b42258546be85392663f200a37c = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_26f667cc9241460c9ba8407c81bd3392.setIcon(icon_e80d1b42258546be85392663f200a37c);
+            
+    
+            var popup_269f9291d84a4bacba1f1cee01de8342 = L.popup({maxWidth: '300'});
+
+            
+                var html_9878fec726ad48a7aba71d90b022db42 = $('<div id="html_9878fec726ad48a7aba71d90b022db42" style="width: 100.0%; height: 100.0%;">police station:Shauri </div>')[0];
+                popup_269f9291d84a4bacba1f1cee01de8342.setContent(html_9878fec726ad48a7aba71d90b022db42);
+            
+
+            marker_26f667cc9241460c9ba8407c81bd3392.bindPopup(popup_269f9291d84a4bacba1f1cee01de8342);
+
+            
+        
+    
+
+            var marker_1f27253eae964ee7b2ae2b65f23b474f = L.marker(
+                [-1.2499968,36.78486136],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_6cba0cf39cea441fb764fb5587e41e83);
+            
+    
+
+                var icon_0ab6df6b0b1447d794a47fc26541d962 = L.AwesomeMarkers.icon({
+                    icon: 'info-sign',
+                    iconColor: 'white',
+                    markerColor: 'yellow',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_1f27253eae964ee7b2ae2b65f23b474f.setIcon(icon_0ab6df6b0b1447d794a47fc26541d962);
+            
+    
+            var popup_b981964f2fd54a258532c661305b5392 = L.popup({maxWidth: '300'});
+
+            
+                var html_53fd32db40d8428b8724acab8963a80f = $('<div id="html_53fd32db40d8428b8724acab8963a80f" style="width: 100.0%; height: 100.0%;">police station:Spring Valley </div>')[0];
+                popup_b981964f2fd54a258532c661305b5392.setContent(html_53fd32db40d8428b8724acab8963a80f);
+            
+
+            marker_1f27253eae964ee7b2ae2b65f23b474f.bindPopup(popup_b981964f2fd54a258532c661305b5392);
+
+            
+        
+    
+            var layer_control_825bdb5e14ff47c6ba2afb7cb1fe8ce6 = {
+                base_layers : { "openstreetmap" : tile_layer_0d56982f253b45089ee9c40e27379a9f, },
+                overlays : {  }
+                };
+            L.control.layers(
+                layer_control_825bdb5e14ff47c6ba2afb7cb1fe8ce6.base_layers,
+                layer_control_825bdb5e14ff47c6ba2afb7cb1fe8ce6.overlays,
+                {position: 'topright',
+                 collapsed: true,
+                 autoZIndex: true
+                }).addTo(map_3d69797852424901b4bc1be5978f0304);
+        
+</script>

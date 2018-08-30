@@ -1,0 +1,63 @@
+    <style>
+	ul{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	overflow: hidden;
+	background-color:#39CCCC;
+	position: fixed;
+	width:100%;
+	top:0;
+	font-family: mono-space;}
+	.class logo{
+	padding-top:5px}
+	li {
+	   float: left;
+	}
+	li a{
+	display: block;
+	color: #000;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration:none;
+	}
+	li a:hover{
+	background-color:#111;
+	color: white;}
+	.active{
+	background-color: #4CAF50;}</style>
+	<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Crime HotSpot Identification</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+      </head>
+      <body>
+        <header>
+          <div class="container">
+            <h1 class="logo">Police Data Analysis on Crime </h1>
+            <strong><nav>
+              <ul class="menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+				<li><a href="{{ url_for('about') }}">Police station</a></li>
+				<li><a href="{{ url_for('heatmap') }}">Crime Hot-spots</a></li>
+				<li><a href="{{ url_for('prediction') }}">Crime analysis</a></li>
+				<li><a href="{{ url_for('witness') }}">Witness List</a></li>
+				<li><a href="{{ url_for('suspect') }}">Suspect List</a></li>
+				<li><a href="{{ url_for('weeklyreport') }}">Crime Reports</a></li>
+				<li><a href="{{ url_for('genderanalysis') }}">Gender analysis</a></li>
+				<li><a href="{{ url_for('downloads') }}">Downloads</a></li>
+				<li><a href="{{ url_for('contacts') }}">Contacts</a></li>
+				<li><a href="{{ url_for('logout') }}">Logout</a></li>
+				
+              </ul>
+            </nav></strong>
+          </div>
+        </header>
+        <div class="container">
+		{% block content %}
+		{% endblock %}
+        </div>
+      </body>
+    </html>
+	

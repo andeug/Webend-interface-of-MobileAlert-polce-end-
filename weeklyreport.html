@@ -1,0 +1,45 @@
+    {% extends "layout.html" %}
+    {% block content %}
+	<style>
+div {
+    margin-bottom: 15px;
+    padding: 4px 12px;
+}
+U{
+background-color:#7FFF00;
+}
+
+
+.info {
+    background-color:#7FFF00;
+    border-left: 6px solid #333;
+}</style>
+    <h2><U>Graph Plot of Crime Reports in Nairobi</U> </h2>
+	
+   <div class="info">
+   <P>The graph below shows the plot of frequently occurring crimes  in Nairobi county.</P>
+   <p> Crime categories are plotted against their number of  occurrences in the county  .</p>
+   <p> This graph helps the user to determine the frequently occurring crimes in the county and the less occurring crimes.  </p>
+   </div>
+   <P><img src="{{ url_for('static',filename="crime.jpg")}}"></P>
+	
+	  <h2><U>Plot of  crime frequency per location in Nairobi </U></h2>
+	
+	<div class="info">
+   <P>The graph below shows the crime frequencies per locations in Nairobi county.</P>
+   <p> Crime frequencies are plotted against the  location of  occurrences in the county  .</p>
+   <p> This graph helps the user to determine the places with high and low crime prevalence  </p>
+   </div>
+     <P><img src="{{ url_for('static',filename="frequency.jpg")}}"></P>
+	
+	
+	<h2><U>Plot of how crimes occur in specific location per Crime Type</U></h2>
+	<div class="info">
+   <P>The graph below shows the plot of major crimes  in Nairobi county and their frequency of occurrence per week day</P>
+   
+   <p> This graph helps the user to determine major crimes and which day of the week they occur often </p>
+   </div>
+   <P><img src="{{ url_for('static',filename="crimeloc.jpg")}}"></P>
+	
+     
+    {% endblock %}

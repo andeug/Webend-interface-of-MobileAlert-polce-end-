@@ -1,0 +1,97 @@
+   {% extends "layout.html" %}
+    {% block content %}
+	<style>
+div {
+    margin-bottom: 15px;
+    padding: 4px 12px;
+}
+U{
+background-color:#FFF000;
+}
+
+
+body {
+    background-color:#7FFF00;
+    border-left: 6px solid #333;
+}
+</style>
+  <!-- <div class="info">
+        <h1>EXPLORATIVE DATA ANALYSIS</h1>
+        <p><strong>INFO:</strong>This section deals with Nairobi's crime analysis  </p>
+		<p>User can draw some inferences from the graphs and pin relationships among crimes in Nairobi.</p>
+		<p>These graphs can also be used by the user to detect crime trends and pattern in crime </p>
+   
+   </div>-->
+   <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- the below three lines are a fix to get HTML5 semantic elements working in old versions of Internet Explorer-->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+       <form>
+         <input type="search" name="q" placeholder="Search query">
+         <input type="submit" value="Go!">
+       </form>
+     </nav>
+
+    <!-- Here is our page's main content -->
+    <main>
+
+      <!-- It contains an article -->
+      <article>
+        <h2>Police Information</h2>
+
+        <p>this section contains police reports ,assigned cases, police on duty and other related police information, internal memos and communication,rules to be followed and so on.</p>
+
+        <h3>Cases Filed Section</h3>
+
+        <p>section containing the type pf cases filled ,if they are open or closed , related parties , action to be taken , witness list plus suspect list together with their scheduling</p>
+
+        <p>includes a list of evidence the chain and procedures to be taken and also my include evidence module</p>
+
+        <h3>Data Analytics section</h3>
+
+        <p>presentation of data analytics tools in this section ,reports to be submitted ,prediction to be made ,evaluation of historical data and also further references provide room for research</p>
+
+        <p>presentation of data analytics tools in this section ,reports to be submitted ,prediction to be made ,evaluation of historical data and also further references provide room for research</p>
+      </article>
+
+      <!-- the aside content can also be nested within the main content -->
+      <aside>
+        <h2>Related</h2>
+
+       <!--  <ul>
+          <li><a href="#">Oh I do like to be beside the seaside</a></li>
+          <li><a href="#">Oh I do like to be beside the sea</a></li>
+          <li><a href="#">Although in the North of England</a></li>
+          <li><a href="#">It never stops raining</a></li>
+          <li><a href="#">Oh well...</a></li>
+        </ul> -->
+      </aside>
+    </main>
+
+
+    <!-- And here is our main footer that is used across all the pages of our website -->
+
+    <footer>
+      <p>©Copyright 2018 by AndrewEugine Simiyu. All rights reversed.</p>
+	  <p>Posted by: Andrew Eugine Simiyu</p>
+  <p>Contact information: <a href="andrewsimiyu1@gmail.com">
+  andrewsimiyu1@gmail.com</a>.</p>
+    </footer>
+
+  </body>
+</html>
+   
+   
+  
+     
+    {% endblock %}
